@@ -22,6 +22,11 @@ footer:
   css:
     theme:
       css/footer.css: { }
+form_protection:
+  js:
+    js/form_protection.js: { }
+  dependencies:
+    - core/jquery
 help:
   css:
     theme:
