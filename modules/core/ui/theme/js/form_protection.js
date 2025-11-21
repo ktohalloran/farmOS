@@ -14,7 +14,10 @@
             let allowClick = false;
             let formIsDirty = false;
 
-            behavior.getInitialFormVals(context)
+            // get initial form state on initial load
+            $("form", context).each(function () {
+                behavior.initialFormState[$(this).attr("id")] = $(this).serialize();
+            });
 
             // Let all form submit buttons through.
             $("input[type='submit'], button[type='submit']").each(function() {
@@ -44,13 +47,6 @@
                     return (Drupal.t("You have unsaved changes."))
                 }
             }
-        },
-
-        getInitialFormVals: function (context) {
-            let behavior = Drupal.behaviors.form_protection;
-            $("form", context).each(function () {
-                behavior.initialFormState[$(this).attr("id")] = $(this).serialize();
-            });
         },
 
         checkForUnsavedChanges: function () {
