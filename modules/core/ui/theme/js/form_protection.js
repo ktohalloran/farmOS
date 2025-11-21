@@ -14,10 +14,7 @@
             let allowClick = false;
             let formIsDirty = false;
 
-            // save initial form state only on initial load
-            $( window ).on("load", function () {
-                behavior.getInitialFormVals()
-            })
+            behavior.getInitialFormVals(context)
 
             // Let all form submit buttons through.
             $("input[type='submit'], button[type='submit']").each(function() {
@@ -49,9 +46,9 @@
             }
         },
 
-        getInitialFormVals: function () {
+        getInitialFormVals: function (context) {
             let behavior = Drupal.behaviors.form_protection;
-            $("form").each(function () {
+            $("form", context).each(function () {
                 behavior.initialFormState[$(this).attr("id")] = $(this).serialize();
             });
         },
