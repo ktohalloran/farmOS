@@ -46,17 +46,21 @@ class FormHooks {
   }
 
   /**
-   * Implements hook_form_alter()
+   * Implements hook_form_alter().
    */
   #[Hook('form_alter')]
   public function formAlter(&$form, FormStateInterface $form_state, $form_id) {
+    // List of substrings the forms we want to add this to have in their ids.
     $allowed_form_id_list = ["add_form", "edit_form", "quick_form"];
-    $add_to_form = false;
     foreach ($allowed_form_id_list as $allowed_form_id) {
       $add_to_form = str_contains($form_id, $allowed_form_id);
-    }
-    if ($add_to_form) {
-      $form['#attached']['library'][] = 'farm_ui_theme/form_protection';
+
+      // If we're looking at an eligible form, attach JS library.
+      if ($add_to_form) {
+        $form['#attached']['library'][] = 'farm_ui_theme/form_protection';
+        break;
+      }
     }
   }
+
 }

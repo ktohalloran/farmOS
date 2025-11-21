@@ -14,7 +14,10 @@
             let allowClick = false;
             let formIsDirty = false;
 
-            behavior.getInitialFormVals()
+            // save initial form state only on initial load
+            $( window ).on("load", function () {
+                behavior.getInitialFormVals()
+            })
 
             // Let all form submit buttons through.
             $("input[type='submit'], button[type='submit']").each(function() {
