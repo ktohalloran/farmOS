@@ -23,6 +23,9 @@ class FormHooks {
     /** @var \Drupal\asset\Entity\AssetInterface $entity */
     $entity = $form_object->getEntity();
     FarmUiThemeHelper::setArchivedMessage($entity);
+
+    // add form protection library.
+    $form['#attached']['library'][] = 'farm_form/form_protection';
   }
 
   /**
@@ -35,6 +38,27 @@ class FormHooks {
     /** @var \Drupal\asset\Entity\AssetInterface $entity */
     $entity = $form_object->getEntity();
     FarmUiThemeHelper::setArchivedMessage($entity);
+
+    // add form protection library.
+    $form['#attached']['library'][] = 'farm_form/form_protection';
+  }
+
+  /**
+   * Implements hook_form_BASE_FORM_ID_alter().
+   */
+  #[Hook('form_log_form_alter')]
+  public function formLogFormAlter(&$form, FormStateInterface $form_state, $form_id) {
+    // add form protection library.
+    $form['#attached']['library'][] = 'farm_form/form_protection';
+  }
+
+  /**
+   * Implements hook_form_BASE_FORM_ID_alter().
+   */
+  #[Hook('form_organization_form_alter')]
+  public function formOrganizationFormAlter(&$form, FormStateInterface $form_state, $form_id) {
+    // add form protection library.
+    $form['#attached']['library'][] = 'farm_form/form_protection';
   }
 
   /**
