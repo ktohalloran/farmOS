@@ -11,4 +11,5 @@ dependencies:
   - farm:farm_log_quantity
   - farm:farm_setup
   - farm:quantity
+  - farm:farm_form
   - log:log

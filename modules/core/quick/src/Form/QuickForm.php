@@ -108,6 +108,9 @@ class QuickForm extends FormBase implements BaseFormIdInterface {
       ];
     }
 
+    // add form protection library.
+    $form['#attached']['library'][] = 'farm_form/form_protection';
+
     return $form;
   }
 
