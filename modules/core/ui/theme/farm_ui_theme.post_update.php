@@ -10,9 +10,9 @@ declare(strict_types=1);
 /**
  * Enable farm_form module.
  */
-function farm_api_post_update_enable_farm_form(&$sandbox = NULL) {
+function farm_ui_theme_post_update_enable_farm_form(&$sandbox = NULL) {
 
-  // Enable static scope module.
+  // Enable farm_form module.
   if (!\Drupal::service('module_handler')->moduleExists('farm_form')) {
     \Drupal::service('module_installer')->install(['farm_form']);
   }

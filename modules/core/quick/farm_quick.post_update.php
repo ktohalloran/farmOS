@@ -10,8 +10,7 @@ declare(strict_types=1);
 /**
  * Enable farm_form module.
  */
-function farm_api_post_update_enable_farm_form(&$sandbox = NULL)
-{
+function farm_quick_post_update_enable_farm_form(&$sandbox = NULL) {
 
   // Enable farm_form module.
   if (!\Drupal::service('module_handler')->moduleExists('farm_form')) {
