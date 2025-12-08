@@ -13,7 +13,10 @@ use Drupal\farm_ui_theme\FarmUiThemeHelper;
  */
 class FormHooks {
 
-  private function addFormProtection (&$form) {
+  /**
+   * Checks for form protection setting and attaches library if enabled.
+   */
+  private function addFormProtection(&$form) {
     // Check that form protection setting is enabled.
     $config_factory = \Drupal::configFactory();
     $settings = $config_factory->get('farm_form.settings');

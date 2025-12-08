@@ -12,7 +12,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides a settings form for the form protection functionality added by the farm_form module.
+ * Provides settings form for enabling form protection functionality.
  */
 class FormProtectionSettingsForm extends ConfigFormbase {
   use AutowireTrait;
@@ -74,4 +74,5 @@ class FormProtectionSettingsForm extends ConfigFormbase {
 
     parent::submitForm($form, $form_state);
   }
+
 }
