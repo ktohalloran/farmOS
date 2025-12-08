@@ -108,9 +108,16 @@ class QuickForm extends FormBase implements BaseFormIdInterface {
       ];
     }
 
-    // Add form protection library.
-    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
-    $form['#attached']['library'][] = 'farm_form/form_protection';
+    // Check that form protection setting is enabled.
+    $config_factory = \Drupal::configFactory();
+    $settings = $config_factory->get('farm_form.settings');
+    $use_form_protection = $settings->get('enable_form_protection');
+
+    // Add form protection library if enabled.
+    if ($use_form_protection) {
+      $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
+      $form['#attached']['library'][] = 'farm_form/form_protection';
+    }
 
     return $form;
   }

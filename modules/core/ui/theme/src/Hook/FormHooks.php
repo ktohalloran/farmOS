@@ -13,6 +13,19 @@ use Drupal\farm_ui_theme\FarmUiThemeHelper;
  */
 class FormHooks {
 
+  private function addFormProtection (&$form) {
+    // Check that form protection setting is enabled.
+    $config_factory = \Drupal::configFactory();
+    $settings = $config_factory->get('farm_form.settings');
+    $use_form_protection = $settings->get('enable_form_protection');
+
+    // Add form protection library if enabled.
+    if ($use_form_protection) {
+      $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
+      $form['#attached']['library'][] = 'farm_form/form_protection';
+    }
+  }
+
   /**
    * Implements hook_form_BASE_FORM_ID_alter().
    */
@@ -24,9 +37,7 @@ class FormHooks {
     $entity = $form_object->getEntity();
     FarmUiThemeHelper::setArchivedMessage($entity);
 
-    // Add form protection library.
-    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
-    $form['#attached']['library'][] = 'farm_form/form_protection';
+    $this->addFormProtection($form);
   }
 
   /**
@@ -40,9 +51,7 @@ class FormHooks {
     $entity = $form_object->getEntity();
     FarmUiThemeHelper::setArchivedMessage($entity);
 
-    // Add form protection library.
-    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
-    $form['#attached']['library'][] = 'farm_form/form_protection';
+    $this->addFormProtection($form);
   }
 
   /**
@@ -50,9 +59,7 @@ class FormHooks {
    */
   #[Hook('form_log_form_alter')]
   public function formLogFormAlter(&$form, FormStateInterface $form_state, $form_id) {
-    // Add form protection library.
-    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
-    $form['#attached']['library'][] = 'farm_form/form_protection';
+    $this->addFormProtection($form);
   }
 
   /**
@@ -60,9 +67,7 @@ class FormHooks {
    */
   #[Hook('form_organization_form_alter')]
   public function formOrganizationFormAlter(&$form, FormStateInterface $form_state, $form_id) {
-    // Add form protection library.
-    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
-    $form['#attached']['library'][] = 'farm_form/form_protection';
+    $this->addFormProtection($form);
   }
 
   /**
