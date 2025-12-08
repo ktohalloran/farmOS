@@ -1,0 +1,5 @@
+farm_form.settings:
+  base_route: farm_settings.settings_page
+  route_name: farm_form.settings
+  title: 'Form Protection'
+  weight: 7

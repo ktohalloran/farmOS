@@ -1,0 +1,7 @@
+farm_form.settings:
+  path: 'farm/settings/form-protection'
+  defaults:
+    _form: '\Drupal\farm_form\Form\FormProtectionSettingsForm'
+    _title: 'Form Protection Settings'
+  requirements:
+    _permission: 'administer farm form'
