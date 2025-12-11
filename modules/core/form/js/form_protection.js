@@ -4,16 +4,16 @@
  */
 (function ($, Drupal) {
 
-    "use strict"
+    "use strict";
 
     Drupal.behaviors.form_protection = {
 
         initialFormState: {},
 
         attach: function (context) {
-            let behavior = Drupal.behaviors.form_protection
-            let allowClick = false
-            let formIsDirty = false
+            const behavior = Drupal.behaviors.form_protection;
+            let allowClick = false;
+            let formIsDirty = false;
 
             // Get initial form state on initial load.
             $("form.protected :input", context).each(function () {
@@ -32,7 +32,7 @@
             $("a, button, input[type='submit']:not(.allow-submit), button[type='submit']:not(.allow-submit)")
                 .each(function() {
                     $(this).click(function() {
-                        formIsDirty = behavior.checkForUnsavedChanges()
+                        formIsDirty = behavior.checkForUnsavedChanges();
                         // If the user clicked on a # link or the form is not dirty, let click through; otherwise,
                         // return something other than undefined to trigger onbeforeunload.
                         if (formIsDirty && $(this).attr("href") !== "#") {
@@ -45,31 +45,31 @@
             window.onbeforeunload = function () {
                 if (formIsDirty && !allowClick) {
                     allowClick = false;
-                    return (Drupal.t("You have unsaved changes."))
+                    return (Drupal.t("You have unsaved changes."));
                 }
             }
         },
 
         checkForUnsavedChanges: function () {
-            let behavior = Drupal.behaviors.form_protection;
-            let formIsDirty = false
+            const behavior = Drupal.behaviors.form_protection;
+            let formIsDirty = false;
 
             $("form.protected :input").each(function () {
-                const elId = $(this).attr("id")
+                const elId = $(this).attr("id");
 
                 // Check new state against initial state if available; if it's not, move on.
                 if (elId && Object.keys(behavior.initialFormState).includes(elId)) {
                     const updatedFormState = $(this).serialize();
-                    formIsDirty = updatedFormState !== behavior.initialFormState[elId]
+                    formIsDirty = updatedFormState !== behavior.initialFormState[elId];
                 }
 
                 // If we find a value that has been changed, break out of the loop (which in jQuery apparently
                 // means return false).
                 if (formIsDirty) {
-                    return false
+                    return false;
                 }
             })
-            return formIsDirty
+            return formIsDirty;
         },
 
     }
