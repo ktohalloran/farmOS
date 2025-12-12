@@ -16,7 +16,7 @@
             let formIsDirty = false;
 
             // Get initial form state on initial load.
-            $("form.protected :input", context).each(function () {
+            $("form.entity-or-quick-form-protected :input", context).each(function () {
                 behavior.initialFormState[$(this).attr("id")] = $(this).serialize();
             });
 
@@ -54,7 +54,7 @@
             const behavior = Drupal.behaviors.form_protection;
             let formIsDirty = false;
 
-            $("form.protected :input").each(function () {
+            $("form.entity-or-quick-form-protected :input").each(function () {
                 const elId = $(this).attr("id");
 
                 // Check new state against initial state if available; if it's not, move on.

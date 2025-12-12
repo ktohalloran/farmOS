@@ -109,7 +109,7 @@ class QuickForm extends FormBase implements BaseFormIdInterface {
     }
 
     // Add form protection library.
-    $form['#attributes']['class'][] = 'protected';
+    $form['#attributes']['class'][] = 'entity-or-quick-form-protected';
     $form['#attached']['library'][] = 'farm_form/form_protection';
 
     return $form;
