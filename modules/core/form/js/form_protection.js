@@ -2,10 +2,6 @@
  * @file
  * Show warning when a user is about to navigate away from an unsaved, dirty form.
  */
-/**
- * @file
- * Show warning when a user is about to navigate away from an unsaved, dirty form.
- */
 (function ($, Drupal) {
 
     "use strict"
@@ -17,24 +13,21 @@
     let submitWasClicked = false;
 
     const doesAnyProtectedFormContainChanges = function() {
-        const anyFormElementChanged = $("form.protected :input").is(function(i, el) {
-            if (!el.id or !Object.hasOwn(initialFormState, el.id)) {
+        return $("form.entity-or-quick-form-protected :input").is(function(i, el) {
+            if (!el.id || !Object.hasOwn(initialFormState, el.id)) {
                 return false;
             }
 
-            const formElementChanged = $(this).serialize() !== initialFormState[elId];
+            return $(this).serialize() !== initialFormState[el.id];
 
-            return formElementChanged;
         });
-
-        return anyFormElementChanged;
     };
 
     Drupal.behaviors.form_protection = {
 
         attach: function (context) {
             // Save the initial form state of any input elements in the attached DOM
-            $("form.protected :input", context).each(function () {
+            $("form.entity-or-quick-form-protected :input", context).each(function () {
                 if (this.id) {
                   initialFormState[this.id] = $(this).serialize();
                 }
