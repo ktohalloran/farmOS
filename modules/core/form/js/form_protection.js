@@ -17,7 +17,6 @@
             if (!el.id || !Object.hasOwn(initialFormState, el.id)) {
                 return false;
             }
-
             return $(this).serialize() !== initialFormState[el.id];
 
         });
@@ -33,10 +32,14 @@
                 }
             });
 
-            // Let all form submit buttons through.
-            $("input[type='submit'], button[type='submit']", context).click(function() {
-                submitWasClicked = true;
-            });
+            // Tell onbeforeunload to allow submit buttons through; excludes entity asset buttons specific to
+            // the entity browser, which don't trigger onbeforeunload and therefore shouldn't change
+            // submitWasClicked.
+            $("input[type='submit'], button[type='submit']", context)
+                .not("[class*='entity-browser']")
+                .click(function() {
+                    submitWasClicked = true;
+                });
 
             // Handle navigation, backbutton, exit etc.
             window.onbeforeunload = function () {
