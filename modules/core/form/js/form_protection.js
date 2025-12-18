@@ -32,14 +32,10 @@
                 }
             });
 
-            // Tell onbeforeunload to allow submit buttons through; excludes entity asset buttons specific to
-            // the entity browser, which don't trigger onbeforeunload and therefore shouldn't change
-            // submitWasClicked.
-            $("input[type='submit'], button[type='submit']", context)
-                .not("[class*='entity-browser']")
-                .click(function() {
-                    submitWasClicked = true;
-                });
+            // Tell onbeforeunload to allow the "submit" event through.
+            $("form.entity-or-quick-form-protected").on("submit", () => {
+                submitWasClicked = true;
+            });
 
             // Handle navigation, backbutton, exit etc.
             window.onbeforeunload = function () {
